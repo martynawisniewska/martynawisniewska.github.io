@@ -1,0 +1,100 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #374151;
+  white-space: pre-wrap;
+  margin-bottom: 1.5rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  flex: 1 1 45%;
+  transition: background 0.2s ease;
+}
+
+.whatsapp {
+  background: #25D366;
+}
+
+.whatsapp:hover {
+  background: #1eb84a;
+}
+
+.messenger {
+  background: #0084FF;
+}
+
+.messenger:hover {
+  background: #006ad1;
+}
+
+.sms {
+  background: #10b981;
+}
+
+.sms:hover {
+  background: #0e9f6e;
+}
+
+.email {
+  background: #6366f1;
+}
+
+.email:hover {
+  background: #4f46e5;
+}
+
+.copy {
+  background: #6b7280;
+}
+
+.copy:hover {
+  background: #4b5563;
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
