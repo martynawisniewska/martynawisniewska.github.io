@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poleć Brydża!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d02d6e7a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Poleć Brydża znajomym!</h1>
+    <p id="msg"></p>
+    <div class="buttons">
+      <button id="shareBtn" class="btn" aria-label="Udostępnij systemowo">
+        <i class="fas fa-share-alt"></i> Udostępnij
+      </button>
+      <a id="waBtn" class="btn whatsapp" href="#" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a id="msgrBtn" class="btn messenger" href="https://m.me/" target="_blank" rel="noopener">
+        <i class="fab fa-facebook-messenger"></i> Messenger
+      </a>
+      <a id="smsBtn" class="btn sms" href="#">
+        <i class="fas fa-sms"></i> SMS
+      </a>
+      <a id="emailBtn" class="btn email" href="#" target="_blank" rel="noopener">
+        <i class="fas fa-envelope"></i> Email
+      </a>
+      <button id="copyBtn" class="btn copy">
+        <i class="fas fa-copy"></i> Kopiuj wiadomość
+      </button>
+    </div>
+    <footer id="footnote"></footer>
+  </div>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const refParam = params.get('ref') || '';
+      const instructorName = refParam ? decodeURIComponent(refParam.replace(/_/g, ' ')) : 'naszego instruktora';
+
+      const message = `Hej! Ostatnio chodziłam na zajęcia z Brydża prowadzonych przez ${instructorName}. Bardzo mi się podobały 😊\nChciałabym Ci je polecić! Pierwszy miesiąc masz za darmo, jeśli powiesz, że jesteś z mojego polecenia 💬`;
+
+      document.getElementById('msg').textContent = message;
+
+      const encodedMsg = encodeURIComponent(message);
+
+      document.getElementById('waBtn').href = `https://wa.me/?text=${encodedMsg}`;
+      document.getElementById('smsBtn').href = `sms:?&body=${encodedMsg}`;
+      document.getElementById('emailBtn').href = `mailto:?subject=Polecenie%20zaj%C4%99%C4%87%20Bryd%C5%BCa&body=${encodedMsg}`;
+
+      const shareBtn = document.getElementById('shareBtn');
+      if (navigator.share) {
+        shareBtn.addEventListener('click', async () => {
+          try {
+            await navigator.share({ text: message });
+          } catch (err) {
+            console.error('Udostępnianie anulowane lub niedostępne', err);
+          }
+        });
+      } else {
+        shareBtn.style.display = 'none';
+      }
+
+      document.getElementById('copyBtn').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(message);
+          alert('Wiadomość skopiowana do schowka!');
+        } catch (err) {
+          alert('Nie udało się skopiować wiadomości.');
+        }
+      });
+
+      if (refParam) {
+        document.getElementById('footnote').textContent = `Kod polecenia instruktora: ${instructorName}`;
+      }
+    })();
+  </script>
+</body>
+</html>
